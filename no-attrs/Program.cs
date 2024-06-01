@@ -12,7 +12,7 @@ internal class Program {
         var newPath = args.Length >= 2 ? args[1] : args[0].Replace(".dll", "-no-attrs.dll");
         var deps = Directory.GetFiles(Path.GetDirectoryName(args[0]), "*.dll", SearchOption.AllDirectories).ToList();
         deps.Remove(args[0]);
-        deps.Remove(args[0]);
+        deps.Remove(newPath);
         var module = ModuleDefinition.ReadModule(args[0], new ReaderParameters { AssemblyResolver = new NAResolver(deps) });
         foreach(var t in module.Types) {
             t.CustomAttributes.Clear();
